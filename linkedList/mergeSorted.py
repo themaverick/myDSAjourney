@@ -83,14 +83,23 @@ class LinkedList:
             print()
         return
 
+def printll(head):
+    temp = head
+    while(temp != None):
+        print(f"{temp.data}", end=" -> " if temp.next else "")
+        temp = temp.next
+    if temp is None:
+        print()
+    return
+
 def mergeSorted(ll1, ll2):
     cur1 = ll1.head
     cur2 = ll2.head
 
     if cur1.data > cur2.data:
-        ans = ll1
+        ans = cur2
     else:
-        ans = ll2
+        ans = cur1
 
     while cur1 is not None and cur2 is not None:
         if cur1.data > cur2.data:
@@ -118,6 +127,33 @@ def mergeSorted(ll1, ll2):
 
     return ans
 
+def mergeSortedPro(ll1, ll2):
+    if ll1.head.data < ll2.head.data:
+        ans = ll1.head
+        cur1 = ll1.head.next
+        cur2 = ll2.head
+        current = ll1.head
+    else:
+        ans = ll2.head
+        cur1 = ll2.head.next
+        cur2 = ll1.head
+        current = ll2.head
+
+    while cur1 is not None and cur2 is not None:
+        if cur1.data < cur2.data:
+            current.next = cur1
+            cur1 = cur1.next
+        else:
+            current.next = cur2
+            cur2 = cur2.next
+        current = current.next
+    if cur1 is not None:
+        current.next = cur1
+    elif cur2 is not None:
+        current.next = cur2
+    
+    return ans
+
 a = LinkedList()
 b = LinkedList()
 a.insertAtTail(1)
@@ -135,9 +171,9 @@ b.insertAtTail(90)
 a.printList()
 b.printList()
 
-sorted = mergeSorted(a, b)
+sorted = mergeSortedPro(a, b)
 
-sorted.printList()
+printll(sorted)
 
 
 
