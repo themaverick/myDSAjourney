@@ -1,1 +1,1 @@
-day 10 recursion: time and space complexity analysis of recusrion problems.
+day 10 recursion: time and space complexity analysis of recursion problems.
